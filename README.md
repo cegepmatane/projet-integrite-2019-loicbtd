@@ -1,1 +1,2 @@
-projet-integrite-2019-loicbtd
+# bergerie
+Programme d'exemple de base de données gérée par une app javafx
