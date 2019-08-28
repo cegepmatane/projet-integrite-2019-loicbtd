@@ -1,14 +1,10 @@
 package donnee;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import modele.Voiture;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import modele.Voiture;
 
 public class VoitureDAO implements VoitureSQL {
 		
@@ -16,7 +12,7 @@ public class VoitureDAO implements VoitureSQL {
 	
 	public VoitureDAO()
 	{
-		this.connection = BaseDeDonnees.getInstance().getConnection();		
+		this.connection = BaseDeDonnees.getInstance().getConnection();
 	}
 	
 	@SuppressWarnings("unused")
@@ -94,12 +90,12 @@ public class VoitureDAO implements VoitureSQL {
 		}
 	}
 	
-	public Voiture rapporterVoiture(int idMouton)
+	public Voiture rapporterVoiture(int idVoiture)
 	{
 		PreparedStatement requeteVoiture;
 		try {
 			requeteVoiture = connection.prepareStatement(SQL_RAPPORTER_VOITURES);
-			requeteVoiture.setInt(1, idMouton);
+			requeteVoiture.setInt(1, idVoiture);
 			System.out.println(SQL_RAPPORTER_VOITURES);
 			ResultSet curseurVoiture = requeteVoiture.executeQuery();
 			curseurVoiture.next();

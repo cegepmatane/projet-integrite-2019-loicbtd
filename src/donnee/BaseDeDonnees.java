@@ -5,10 +5,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class BaseDeDonnees {
+
 	private Connection connection = null;
 	
-	private BaseDeDonnees()
-	{
+	private BaseDeDonnees() {
 		try {
 			Class.forName(Acces.BASEDEDONNEES_DRIVER);
 		} catch (ClassNotFoundException e) {
@@ -23,15 +23,13 @@ public class BaseDeDonnees {
 	
 	// SINGLETON - DEBUT
 	private static BaseDeDonnees instance = null;
-	public static BaseDeDonnees getInstance()
-	{
+	public static BaseDeDonnees getInstance() {
 		if(null == instance) instance = new BaseDeDonnees();
 		return instance;
 	}
 	// SINGLETON - FIN
 
-	public Connection getConnection()
-	{
+	public Connection getConnection() {
 		return this.connection;
 	}
 	

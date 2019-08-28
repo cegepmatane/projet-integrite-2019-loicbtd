@@ -1,6 +1,6 @@
 package vue;
 
-import action.ControleurVoiture;
+import action.ControleurMarque;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -8,19 +8,19 @@ public class NavigateurDesVues extends Application{
 	
 	private Stage stade;
 	
-	private VueListeVoiture vueListeVoiture = null;
-	private VueVoiture vueVoiture = null;
-	private VueAjouterVoiture vueAjouterVoiture = null;
-	private VueEditerVoiture vueEditerVoiture = null;
+	private VueListeMarque vueListeMarque = null;
+	private VueMarque vueMarque = null;
+	private VueAjouterMarque vueAjouterMarque = null;
+	private VueEditerMarque vueEditerMarque = null;
 	
-	private ControleurVoiture controleur = null;
+	private ControleurMarque controleur = null;
 	
 	public NavigateurDesVues() 
 	{		
-		this.vueListeVoiture = new VueListeVoiture();
-		this.vueVoiture = new VueVoiture();
-		this.vueAjouterVoiture = new VueAjouterVoiture();
-		this.vueEditerVoiture = new VueEditerVoiture();
+		this.vueListeMarque = new VueListeMarque();
+		this.vueMarque = new VueMarque();
+		this.vueAjouterMarque = new VueAjouterMarque();
+		this.vueEditerMarque = new VueEditerMarque();
 	}
 
 	@Override
@@ -30,50 +30,50 @@ public class NavigateurDesVues extends Application{
 		this.stade.setScene(null);
 		this.stade.show();
 	
-		this.controleur = ControleurVoiture.getInstance();
+		this.controleur = ControleurMarque.getInstance();
 		this.controleur.activerVues(this);
-		this.vueListeVoiture.setControleur(controleur);
-		this.vueVoiture.setControleur(controleur);
-		this.vueAjouterVoiture.setControleur(controleur);
-		this.vueEditerVoiture.setControleur(controleur);
+		this.vueListeMarque.setControleur(controleur);
+		this.vueMarque.setControleur(controleur);
+		this.vueAjouterMarque.setControleur(controleur);
+		this.vueEditerMarque.setControleur(controleur);
 	}	
 	
-	public VueListeVoiture getVueListeVoiture() {
-		return vueListeVoiture;
+	public VueListeMarque getVueListeMarque() {
+		return vueListeMarque;
 	}
 
-	public VueVoiture getVueVoiture() {
-		return vueVoiture;
+	public VueMarque getVueMarque() {
+		return vueMarque;
 	}
 	
-	public VueAjouterVoiture getVueAjouterVoiture() {
-		return vueAjouterVoiture;
+	public VueAjouterMarque getVueAjouterMarque() {
+		return vueAjouterMarque;
 	}
 
-	public VueEditerVoiture getVueEditerVoiture(){
-		return this.vueEditerVoiture;
+	public VueEditerMarque getVueEditerMarque(){
+		return this.vueEditerMarque;
 	}
 	
-	public void naviguerVersVueVoiture() {
-		stade.setScene(this.vueVoiture);
+	public void naviguerVersVueMarque() {
+		stade.setScene(this.vueMarque);
 		stade.show();
 	}
 	
-	public void naviguerVersVueListeVoiture()
+	public void naviguerVersVueListeMarque()
 	{
-		stade.setScene(this.vueListeVoiture);
+		stade.setScene(this.vueListeMarque);
 		stade.show();		
 	}
 	
-	public void naviguerVersVueAjouterVoiture()
+	public void naviguerVersVueAjouterMarque()
 	{
-		stade.setScene(this.vueAjouterVoiture);
+		stade.setScene(this.vueAjouterMarque);
 		stade.show();				
 	}
 
-	public void naviguerVersVueEditerVoiture()
+	public void naviguerVersVueEditerMarque()
 	{
-		stade.setScene(this.vueEditerVoiture);
+		stade.setScene(this.vueEditerMarque);
 		stade.show();				
 	}
 	
