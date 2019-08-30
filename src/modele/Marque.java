@@ -7,13 +7,10 @@ public class Marque {
 	protected String couleurLogo;
 	protected String slogan;
 	protected String dateCreation;
-	
-	public int getId() {
-		return id;
+
+	public Marque() {
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
+
 	public Marque(String nom) {
 		super();
 		this.nom = nom;
@@ -35,6 +32,13 @@ public class Marque {
 		this.couleurLogo = couleurLogo;
 		this.slogan = slogan;
 		this.dateCreation = dateCreation;
+	}
+
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getNom() {
 		return nom;

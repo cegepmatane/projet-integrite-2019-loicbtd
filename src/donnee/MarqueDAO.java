@@ -24,29 +24,35 @@ public class MarqueDAO implements MarqueSQL {
 		listeMarquesTest.add(new Marque("Bugatti", "noir, rouge", "slogan1", "1950"));
 		listeMarquesTest.add(new Marque("Ferrari", "jaune, noir", "slogan3", "1980"));
 		return listeMarquesTest;
-	}	
+	}
+
 	
 	public List<Marque> listerMarques() {
 		List<Marque> listeMarques =  new ArrayList<Marque>();
+
 		Statement requeteListeVoitures;
 		try {
-			requeteListeVoitures = connection.createStatement();
+			requeteListeVoitures = this.connection.createStatement();
 			ResultSet curseurListeMarques = requeteListeVoitures.executeQuery(MarqueSQL.SQL_LISTER_MARQUES);
+
 			while(curseurListeMarques.next()) {
-				int id = curseurListeMarques.getInt("id");
+				Marque marque = new Marque();
+
 				String nom = curseurListeMarques.getString("nom");
 				String couleurLogo = curseurListeMarques.getString("couleur_logo");
 				String slogan = curseurListeMarques.getString("slogan");
 				String dateCreation = curseurListeMarques.getString("date_creation");
-				System.out.println("Marque " + nom + " créée en " + dateCreation + " slogan: " + slogan + " couleur logo: " + couleurLogo);
-				Marque marque = new Marque(nom, couleurLogo, slogan, dateCreation);
-				marque.setId(id);
+				marque.setNom(nom);
+				marque.setCouleurLogo(couleurLogo);
+				marque.setSlogan(slogan);
+				marque.setDateCreation(dateCreation);
+
 				listeMarques.add(marque);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-				
+
 		//return this.simulerListerMarque();
 		return listeMarques;
 	}
@@ -85,11 +91,11 @@ public class MarqueDAO implements MarqueSQL {
 		}
 	}
 	
-	public Marque rapporterMarque(int idMouton) {
+	public Marque rapporterMarque(int idMarque) {
 		PreparedStatement requeteMarque;
 		try {
 			requeteMarque = connection.prepareStatement(SQL_RAPPORTER_MARQUES);
-			requeteMarque.setInt(1, idMouton);
+			requeteMarque.setInt(1, idMarque);
 			System.out.println(SQL_RAPPORTER_MARQUES);
 			ResultSet curseurMarque = requeteMarque.executeQuery();
 			curseurMarque.next();
