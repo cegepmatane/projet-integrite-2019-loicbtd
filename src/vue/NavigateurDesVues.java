@@ -15,8 +15,7 @@ public class NavigateurDesVues extends Application{
 	
 	private ControleurMarque controleur = null;
 	
-	public NavigateurDesVues() 
-	{		
+	public NavigateurDesVues() {
 		this.vueListeMarque = new VueListeMarque();
 		this.vueMarque = new VueMarque();
 		this.vueAjouterMarque = new VueAjouterMarque();
@@ -26,18 +25,18 @@ public class NavigateurDesVues extends Application{
 	@Override
 	public void start(Stage stade) throws Exception {
 		this.stade = stade;
-		
+
 		this.stade.setScene(null);
 		this.stade.show();
-	
+
 		this.controleur = ControleurMarque.getInstance();
 		this.controleur.activerVues(this);
 		this.vueListeMarque.setControleur(controleur);
 		this.vueMarque.setControleur(controleur);
 		this.vueAjouterMarque.setControleur(controleur);
-		this.vueEditerMarque.setControleur(controleur);
-	}	
-	
+		this.vueEditerMarque.setControleurMarque(controleur);
+	}
+
 	public VueListeMarque getVueListeMarque() {
 		return vueListeMarque;
 	}
@@ -45,7 +44,7 @@ public class NavigateurDesVues extends Application{
 	public VueMarque getVueMarque() {
 		return vueMarque;
 	}
-	
+
 	public VueAjouterMarque getVueAjouterMarque() {
 		return vueAjouterMarque;
 	}
@@ -59,22 +58,18 @@ public class NavigateurDesVues extends Application{
 		stade.show();
 	}
 	
-	public void naviguerVersVueListeMarque()
-	{
+	public void naviguerVersVueListeMarque() {
 		stade.setScene(this.vueListeMarque);
 		stade.show();		
 	}
 	
-	public void naviguerVersVueAjouterMarque()
-	{
+	public void naviguerVersVueAjouterMarque() {
 		stade.setScene(this.vueAjouterMarque);
 		stade.show();				
 	}
 
-	public void naviguerVersVueEditerMarque()
-	{
+	public void naviguerVersVueEditerMarque() {
 		stade.setScene(this.vueEditerMarque);
 		stade.show();				
 	}
-	
 }

@@ -28,9 +28,9 @@ SET search_path = public, pg_catalog;
 
 CREATE TABLE marque (
     nom text,
-    couleurLogo text,
+    couleur_logo text,
     slogan text,
-    dateCreation text,
+    date_creation text,
     id integer NOT NULL
 );
 

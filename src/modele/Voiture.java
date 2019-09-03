@@ -7,38 +7,15 @@ public class Voiture {
 	protected String couleur;
 	protected String puissance;
 	protected String annee;
-	protected int idMarque;
 
-	public Voiture(String modele) {
-		super();
-		this.modele = modele;
-	}
-	public Voiture(String modele, String couleur) {
-		super();
-		this.modele = modele;
-		this.couleur = couleur;
-	}
-	public Voiture(String modele, String couleur, String puissance) {
-		super();
-		this.modele = modele;
-		this.couleur = couleur;
-		this.puissance = puissance;
-	}
+	protected int id_marque;
+
 	public Voiture(String modele, String couleur, String puissance, String annee) {
 		super();
 		this.modele = modele;
 		this.couleur = couleur;
 		this.puissance = puissance;
 		this.annee = annee;
-	}
-
-	public Voiture(String modele, String couleur, String puissance, String annee, int idMarque) {
-		super();
-		this.modele = modele;
-		this.couleur = couleur;
-		this.puissance = puissance;
-		this.annee = annee;
-		this.idMarque = idMarque;
 	}
 
 	public int getId() {
@@ -81,11 +58,11 @@ public class Voiture {
 		this.annee = annee;
 	}
 
-	public int getIdMarque() {
-		return idMarque;
+	public int getId_marque() {
+		return id_marque;
 	}
 
-	public void setIdMarque(int idMarque) {
-		this.idMarque = idMarque;
+	public void setId_marque(int id_marque) {
+		this.id_marque = id_marque;
 	}
 }

@@ -4,34 +4,31 @@ public class Marque {
 
 	protected int id;
 	protected String nom;
-	protected String couleurLogo;
+	protected String couleur_logo;
 	protected String slogan;
-	protected String dateCreation;
-
-	public Marque() {
-	}
+	protected String date_creation;
 
 	public Marque(String nom) {
 		super();
 		this.nom = nom;
 	}
-	public Marque(String nom, String couleurLogo) {
+	public Marque(String nom, String couleur_logo) {
 		super();
 		this.nom = nom;
-		this.couleurLogo = couleurLogo;
+		this.couleur_logo = couleur_logo;
 	}
-	public Marque(String nom, String couleurLogo, String slogan) {
+	public Marque(String nom, String couleur_logo, String slogan) {
 		super();
 		this.nom = nom;
-		this.couleurLogo = couleurLogo;
+		this.couleur_logo = couleur_logo;
 		this.slogan = slogan;
 	}
-	public Marque(String nom, String couleurLogo, String slogan, String dateCreation) {
+	public Marque(String nom, String couleur_logo, String slogan, String date_creation) {
 		super();
 		this.nom = nom;
-		this.couleurLogo = couleurLogo;
+		this.couleur_logo = couleur_logo;
 		this.slogan = slogan;
-		this.dateCreation = dateCreation;
+		this.date_creation = date_creation;
 	}
 
 	public int getId() {
@@ -46,17 +43,17 @@ public class Marque {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	public String getCouleurLogo() {
-		return couleurLogo;
+	public String getCouleur_logo() {
+		return couleur_logo;
 	}
-	public void setCouleurLogo(String couleurLogo) {
-		this.couleurLogo = couleurLogo;
+	public void setCouleur_logo(String couleur_logo) {
+		this.couleur_logo = couleur_logo;
 	}
-	public String getDateCreation() {
-		return dateCreation;
+	public String getDate_creation() {
+		return date_creation;
 	}
-	public void setDateCreation(String dateCreation) {
-		this.dateCreation = dateCreation;
+	public void setDate_creation(String date_creation) {
+		this.date_creation = date_creation;
 	}
 	public String getSlogan() {
 		return slogan;
