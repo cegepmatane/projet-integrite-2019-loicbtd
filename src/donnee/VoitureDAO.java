@@ -67,4 +67,52 @@ public class VoitureDAO implements VoitureSQL {
 			e.printStackTrace();
 		}
 	}
+
+	public Voiture rapporterVoiture(int idVoiture) {
+		PreparedStatement requeteMarque;
+		try {
+			requeteMarque = connection.prepareStatement(SQL_RAPPORTER_VOITURE);
+			requeteMarque.setInt(1, idVoiture);
+
+			ResultSet curseurVoiture = requeteMarque.executeQuery();
+			curseurVoiture.next();
+
+			int id = curseurVoiture.getInt("id");
+			String modele = curseurVoiture.getString("modele");
+			String couleur = curseurVoiture.getString("couleur");
+			String puissance = curseurVoiture.getString("puissance");
+			String annee = curseurVoiture.getString("annee");
+
+			Voiture voiture = new Voiture(
+					modele,
+					couleur,
+					puissance,
+					annee
+			);
+			voiture.setId(id);
+			return voiture;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public void modifierVoiture(Voiture voiture) {
+		try {
+			PreparedStatement requeteModifierVoiture = connection.prepareStatement(SQL_MODIFIER_VOITURE);
+
+			requeteModifierVoiture.setString(1, voiture.getModele());
+			requeteModifierVoiture.setString(2, voiture.getCouleur());
+			requeteModifierVoiture.setString(3, voiture.getPuissance());
+			requeteModifierVoiture.setString(4, voiture.getAnnee());
+			requeteModifierVoiture.setInt(5, voiture.getId());
+
+			System.out.println("SQL : " + SQL_MODIFIER_VOITURE);
+			requeteModifierVoiture.execute();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

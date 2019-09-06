@@ -95,11 +95,15 @@ public class VueEditerMarque extends Scene {
 		this.grilleVoitures.getChildren().clear();
 		int rangee = 0;
 		for(Voiture voiture : listeVoitures) {
-			this.grilleVoitures.add(
-					new Label(voiture.getModele()),
-					0,
-					rangee++
-			);
+			this.grilleVoitures.add(new Label(voiture.getModele()), 0, rangee);
+			this.grilleVoitures.add(new Label(voiture.getCouleur()), 1, rangee);
+			this.grilleVoitures.add(new Label(voiture.getAnnee()), 2, rangee);
+
+			Button actionEditerVoiture = new Button("Editer");
+			actionEditerVoiture.setOnAction(
+					arg0 -> controleurMarque.notifierNaviguerEditerVoiture(voiture.getId()));
+			this.grilleVoitures.add(actionEditerVoiture, 2, rangee);
+			rangee++;
 		}
 	}
 }
