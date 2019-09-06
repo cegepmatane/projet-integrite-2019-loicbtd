@@ -4,8 +4,6 @@ import action.ControleurMarque;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class NavigateurDesVues extends Application{
 
 	static private NavigateurDesVues instance;

@@ -95,7 +95,7 @@ public class ControleurMarque {
 		voiture.setId_marque(idMarque);
 		VoitureDAO accesseurVoiture = new VoitureDAO();
 		accesseurVoiture.ajouterVoiture(voiture);
-
-		this.navigateur.naviguerVersVueEditerMarque();
+		notifierNaviguerEditerMarque(idMarque);
+//		this.navigateur.naviguerVersVueEditerMarque();
 	}
 }
