@@ -7,14 +7,14 @@ import modele.Marque;
 
 public class VueMarque extends Scene {
 
+	private ControleurMarque controleurMarque;
+
 	protected Label valeurNom;
 	protected Label valeurCouleurLogo;
 	protected Label valeurSlogan;
 	protected Label valeurDateCreation;
-	
-	@SuppressWarnings("unused")
-	private ControleurMarque controleur = null;
-	
+
+
 	public VueMarque() {
 		super(new GridPane(),400,400);
 		GridPane grillMarque = (GridPane) this.getRoot();
@@ -35,17 +35,15 @@ public class VueMarque extends Scene {
 		grillMarque.add(new Label("Date de création : "), 0, 3);
 		grillMarque.add(valeurDateCreation, 1, 3);
 	}
-	
+
+	public void setControleurMarque(ControleurMarque controleurMarque) {
+		this.controleurMarque = controleurMarque;
+	}
+
 	public void afficherMarque(Marque marque) {
 		this.valeurNom.setText(marque.getNom());
 		this.valeurCouleurLogo.setText(marque.getCouleur_logo());
 		this.valeurSlogan.setText(marque.getSlogan());
 		this.valeurDateCreation.setText(marque.getDate_creation());
 	}
-	
-	
-	public void setControleur(ControleurMarque controleur) {
-		this.controleur = controleur;
-	}
-
 }

@@ -31,6 +31,14 @@ public class Marque {
 		this.date_creation = date_creation;
 	}
 
+	public Marque(int id, String nom, String couleur_logo, String slogan, String date_creation) {
+		this.id = id;
+		this.nom = nom;
+		this.couleur_logo = couleur_logo;
+		this.slogan = slogan;
+		this.date_creation = date_creation;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -61,5 +69,4 @@ public class Marque {
 	public void setSlogan(String slogan) {
 		this.slogan = slogan;
 	}
-	
 }

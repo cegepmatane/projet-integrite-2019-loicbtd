@@ -1,8 +1,6 @@
 package vue;
 
 import action.ControleurMarque;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,34 +14,33 @@ import java.util.List;
 
 public class VueEditerMarque extends Scene {
 
+	protected GridPane grilleVoitures;
+
 	protected TextField valeurNom;
 	protected TextField valeurCouleurLogo;
 	protected TextField valeurSlogan;
 	protected TextField valeurDateCreation;
 
-	protected GridPane grilleVoitures;
-	
-	private ControleurMarque controleurMarque = null;
+	protected Button actionEnregistrerMarque;
+	protected Button actionNaviguerAjouterVoiture;
 
-	protected Button actionEnregistrerMarque = null;
-	protected Button actionNaviguerAjouterVoiture = null;
-	
+	private ControleurMarque controleurMarque;
+
 	private int idMarque = 0;
-	
+
 	public VueEditerMarque() {
 		super(new VBox(), 400, 400);
-		VBox panneau = (VBox) this.getRoot();
+
+		VBox panneau = (VBox)this.getRoot();
 		GridPane grilleMarque = new GridPane();
-				
+
+		this.grilleVoitures = new GridPane();
+
 		this.actionEnregistrerMarque = new Button("Enregistrer");
-		this.actionNaviguerAjouterVoiture = new Button("Ajouter voiture");
-		
-		this.actionEnregistrerMarque.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent arg0) {
-				controleurMarque.notifierEnregistrerMarque();
-			}
-		});
+		this.actionEnregistrerMarque.setOnAction(arg0 -> controleurMarque.notifierEnregistrerMarque());
+
+		this.actionNaviguerAjouterVoiture = new Button("Ajouter une voiture");
+		this.actionNaviguerAjouterVoiture.setOnAction(arg0 -> controleurMarque.notifierNaviguerAjouterVoiture());
 		
 		valeurNom = new TextField();
 		grilleMarque.add(new Label("Nom : "), 0, 0);
@@ -61,15 +58,18 @@ public class VueEditerMarque extends Scene {
 		grilleMarque.add(new Label("Date de création : "), 0, 3);
 		grilleMarque.add(valeurDateCreation, 1, 3);
 
-		grilleVoitures = new GridPane();
-	
 		// Todo : retirer les textes magiques
 		panneau.getChildren().add(new Label("Editer une marque")); // Todo : cr�er un sous-type de Label ou Text pour les titres
 		panneau.getChildren().add(grilleMarque);
 		panneau.getChildren().add(this.actionEnregistrerMarque);
+		panneau.getChildren().add(this.actionNaviguerAjouterVoiture);
 		panneau.getChildren().add(grilleVoitures);
 	}
-	
+
+	public void setControleurMarque(ControleurMarque controleurMarque) {
+		this.controleurMarque = controleurMarque;
+	}
+
 	public void afficherMarque(Marque marque) {
 		this.idMarque = marque.getId();
 		this.valeurNom.setText(marque.getNom());
@@ -79,47 +79,27 @@ public class VueEditerMarque extends Scene {
 	}
 		
 	public Marque demanderMarque() {
-		Marque marque = new Marque(this.valeurNom.getText(),
-								this.valeurCouleurLogo.getText(),
-								this.valeurSlogan.getText(),
-								this.valeurDateCreation.getText());
+		Marque marque = new Marque(
+				this.valeurNom.getText(),
+				this.valeurCouleurLogo.getText(),
+				this.valeurSlogan.getText(),
+				this.valeurDateCreation.getText()
+		);
 		marque.setId(idMarque);
 		return marque;
 	}
 	
-	public void setControleurMarque(ControleurMarque controleurMarque) {
-		this.controleurMarque = controleurMarque;
-	}
 
 	public void afficherListeVoiture(List<Voiture> listeVoitures) {
+
 		this.grilleVoitures.getChildren().clear();
-		this.grilleVoitures.add(new Label("Liste des voitures"), 0, 0);
-		int numero = 1;
-		this.grilleVoitures.add(new Label("modele"), 0, numero);
-		this.grilleVoitures.add(new Label("couleur"), 1, numero);
-
-		for (Voiture voiture : listeVoitures) {
-
-			Button actionEditerVoiture = new Button("Modifier");
-			actionEditerVoiture.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent a) {
-//					controleurVoiture.notifierNaviguerEditerVoiture(voiture.getId()); // TODO ameliorer ceci pour respecter architecture cible = pas de parametre dans les notifications au controleurMarque
-				}
-			});
-			numero++;
-			this.grilleVoitures.add(new Label(voiture.getModele()), 0, numero);
-			this.grilleVoitures.add(new Label(voiture.getCouleur()), 1, numero);
-			this.grilleVoitures.add(actionEditerVoiture, 2, numero);
+		int rangee = 0;
+		for(Voiture voiture : listeVoitures) {
+			this.grilleVoitures.add(
+					new Label(voiture.getModele()),
+					0,
+					rangee++
+			);
 		}
-
-//		this.actionNaviguerAjouterVoiture.setOnAction(new EventHandler<ActionEvent>() {
-//			@Override
-//			public void handle(ActionEvent arg0) {
-//				controleurMarque.notifierNaviguerAjouterMarque();
-//			}
-//		});
-
-		this.grilleVoitures.add(this.actionNaviguerAjouterVoiture, 0, ++numero);
 	}
 }

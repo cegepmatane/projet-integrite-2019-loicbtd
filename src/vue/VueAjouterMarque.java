@@ -16,26 +16,19 @@ public class VueAjouterMarque extends Scene {
 	protected TextField valeurCouleurLogo;
 	protected TextField valeurSlogan;
 	protected TextField valeurDateCreation;
-	
-	private ControleurMarque controleur = null;
-	protected Button actionEnregistrerMarque = null;
-	
+
+	protected Button actionEnregistrerMarque;
+
+	private ControleurMarque controleur;
+
 	public VueAjouterMarque()  {
 		super(new VBox(), 400, 400);
 		VBox panneau = (VBox) this.getRoot();
 		GridPane grilleMarque = new GridPane();
 		this.actionEnregistrerMarque = new Button("Enregistrer");
 		
-		this.actionEnregistrerMarque.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent arg0) {
-				
-				controleur.notifierEnregistrerNouvelleMarque();
-				
-			}});
+		this.actionEnregistrerMarque.setOnAction(arg0 -> controleur.notifierEnregistrerNouvelleMarque());
 		
-		// https://docs.oracle.com/javase/8/javafx/api/javafx/scene/layout/GridPane.html
 		valeurNom = new TextField();
 		grilleMarque.add(new Label("Nom : "), 0, 0);
 		grilleMarque.add(valeurNom, 1, 0);
@@ -52,24 +45,22 @@ public class VueAjouterMarque extends Scene {
 		grilleMarque.add(new Label("Date de création : "), 0, 3);
 		grilleMarque.add(valeurDateCreation, 1, 3);
 			
-		// Todo : retirer les textes magiques
 		panneau.getChildren().add(new Label("Ajouter une marque")); // Todo : cr�er un sous-type de Label ou Text pour les titres
 		panneau.getChildren().add(grilleMarque);
 		panneau.getChildren().add(this.actionEnregistrerMarque);
 	}
 	
-	public Marque demanderMarque()
-	{
-		Marque marque = new Marque(this.valeurNom.getText(),
-								this.valeurCouleurLogo.getText(),
-								this.valeurSlogan.getText(),
-								this.valeurDateCreation.getText());
+	public Marque demanderMarque() {
+		Marque marque = new Marque(
+				this.valeurNom.getText(),
+				this.valeurCouleurLogo.getText(),
+				this.valeurSlogan.getText(),
+				this.valeurDateCreation.getText()
+		);
 		return marque;
 	}
 	
 	public void setControleur(ControleurMarque controleur) {
 		this.controleur = controleur;
 	}
-	
-
 }

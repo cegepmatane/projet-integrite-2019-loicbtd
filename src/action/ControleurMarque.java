@@ -12,18 +12,29 @@ import vue.VueListeMarque;
 import vue.VueMarque;
 
 public class ControleurMarque {
-	
+
+	private static ControleurMarque instance;
+
+	private MarqueDAO accesseurMarque;
+	private VoitureDAO accesseurVoiture;
+
 	private NavigateurDesVues navigateur;
-	private VueListeMarque vueListeMarque = null;
-	private VueMarque vueMarque = null;
-	private VueEditerMarque vueEditerMarque = null;
-	private MarqueDAO marqueDAO = null;
-	private VoitureDAO voitureDAO = null;
-	
-	private ControleurMarque() {
-		System.out.println("Initialisation du controleur");	
-		this.marqueDAO = new MarqueDAO();
-		this.voitureDAO = new VoitureDAO();
+	private VueListeMarque vueListeMarque;
+	private VueMarque vueMarque;
+	private VueEditerMarque vueEditerMarque;
+
+	private int idMarque;
+
+	public ControleurMarque() {
+		this.accesseurMarque = new MarqueDAO();
+		this.accesseurVoiture = new VoitureDAO();
+		this.navigateur = NavigateurDesVues.getInstance();
+		idMarque = 0;
+	}
+
+	public static ControleurMarque getInstance() {
+		if(null == instance) instance = new ControleurMarque();
+		return instance;
 	}
 	
 	public void activerVues(NavigateurDesVues navigateur) {
@@ -32,79 +43,59 @@ public class ControleurMarque {
 		this.vueListeMarque = navigateur.getVueListeMarque();
 		this.vueEditerMarque = navigateur.getVueEditerMarque();
 
-		//// TEST ////
-//		Marque marque = new Marque("Bugatti", "noir, rouge", "Rien n'est trop beau, rien n'est trop cher", "1909");
-//		this.vueMarque.afficherMarque(marque); // Appel de ma fonction avant de la programmer (pour tester � mesure)
-//
-//		this.navigateur.naviguerVersVueMarque();
+		Marque marque = new Marque(
+				"Ferrari",
+				"jaune",
+				"F1",
+				"1800"
+		);
+		this.vueMarque.afficherMarque(marque);
+		this.navigateur.naviguerVersVueMarque();
 
-		/// TEST ///
-		List<Marque> listeMarqueTest = marqueDAO.listerMarques();
-		this.vueListeMarque.afficherListeMarque(listeMarqueTest); // Appel de ma fonction avant de la programmer (pour tester � mesure)
+		List<Marque> listeMarquesTest = accesseurMarque.listerMarques();
+		this.vueListeMarque.afficherListeMarque(listeMarquesTest);
+
 
 		this.navigateur.naviguerVersVueListeMarque();
-
-//		this.navigateur.naviguerVersVueAjouterMarque();
-//
-//		this.vueEditerMarque.afficherListeDistinction(this.distinctionDAO.listerDistinctions());
-
 	}
-	
-	// SINGLETON DEBUT
-	private static ControleurMarque instance = null;
-	public static ControleurMarque getInstance()
-	{
-		if(null == instance) instance = new ControleurMarque();
-		return instance;
-	}
-	// SINGLETON FINI
 
-	
-	
-	
-	
-	
-	
-	//**********************************************************//
-	//                                                          //
-	//                   NOTIFICATIONS                          //
-	//                                                          //
-	//**********************************************************//
-	
-	// Les notifications peuvent �tre g�r�es par callback comme ici ou par �v�nement,
-	// Mais dans les deux cas les op�rations sont divis�es dans des fonctions comme ici
-	// Pas de code dans un switch - case
-	
 	public void notifierEnregistrerNouvelleMarque() {
-		System.out.println("ControleurMarque.notifierEnregistrerNouvelleMarque()");
 		Marque marque = this.navigateur.getVueAjouterMarque().demanderMarque();
-		this.marqueDAO.ajouterMarque(marque);
-		this.vueListeMarque.afficherListeMarque(this.marqueDAO.listerMarques()); // TODO optimiser
+		this.accesseurMarque.ajouterMarque(marque);
+		this.vueListeMarque.afficherListeMarque(this.accesseurMarque.listerMarques()); // TODO optimiser
 		this.navigateur.naviguerVersVueListeMarque();
 	}
 
 	public void notifierEnregistrerMarque() {
-		System.out.println("ControleurMarque.notifierEnregistrerMarque()");
 		Marque marque = this.navigateur.getVueEditerMarque().demanderMarque();
-		this.marqueDAO.modifierMarque(marque);
-		this.vueListeMarque.afficherListeMarque(this.marqueDAO.listerMarques()); // TODO optimiser
+		this.accesseurMarque.modifierMarque(marque);
+		this.vueListeMarque.afficherListeMarque(this.accesseurMarque.listerMarques()); // TODO optimiser
 		this.navigateur.naviguerVersVueListeMarque();
 	}
 
 	public void notifierNaviguerAjouterMarque() {
-		System.out.println("ControleurMarque.notifierNaviguerAjouterMarque()");
 		this.navigateur.naviguerVersVueAjouterMarque();
 	}
 
 	public void notifierNaviguerEditerMarque(int idMarque) {
-
-		System.out.println("ControleurMarque.notifierEditerMarque("+idMarque+")");
-		// savoir par la vue liste quel numero de marque a ete clique
-		Marque marque = this.marqueDAO.rapporterMarque(idMarque);
+		Marque marque = this.accesseurMarque.rapporterMarque(idMarque);
 		this.vueEditerMarque.afficherMarque(marque);
 		this.navigateur.naviguerVersVueEditerMarque();
 
-		List<Voiture> listeVoitures = voitureDAO.listerVoituresParMarque(marque);
+		List<Voiture> listeVoitures = accesseurVoiture.listerVoituresParMarque(marque);
 		this.vueEditerMarque.afficherListeVoiture(listeVoitures);
+	}
+
+	public void notifierNaviguerAjouterVoiture() {
+		this.navigateur.naviguerVersVueAjouterVoiture();
+	}
+
+	public void notifierEnregistrerAjoutVoiture() {
+		Voiture voiture = this.navigateur.getVueAjouterVoiture().demanderVoiture();
+
+		VoitureDAO accesseurVoiture = new VoitureDAO();
+		accesseurVoiture.ajouterVoiture(voiture);
+
+		this.navigateur.naviguerVersVueEditerMarque();
 	}
 }

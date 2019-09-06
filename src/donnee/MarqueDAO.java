@@ -12,26 +12,15 @@ import modele.Marque;
 
 public class MarqueDAO implements MarqueSQL {
 		
-	private Connection connection = null;
+	private Connection connection;
 	
 	public MarqueDAO() {
 		this.connection = BaseDeDonnees.getInstance().getConnection();		
 	}
-	
-	@SuppressWarnings("unused")
-	private List<Marque> simulerListerMarques() {
-		List<Marque> listeMarquesTest = new ArrayList<Marque>();
-		listeMarquesTest.add(new Marque("Bugatti", "noir, rouge", "slogan1", "1950"));
-		listeMarquesTest.add(new Marque("Ferrari", "jaune, noir", "slogan2", "1980"));
-		listeMarquesTest.add(new Marque("Peugeot", "gris", "slogan3", "1980"));
-		listeMarquesTest.add(new Marque("Renault", "gris", "slogan4", "1980"));
-		return listeMarquesTest;
-	}
 
-	
 	public List<Marque> listerMarques() {
 
-		List<Marque> listeMarques =  new ArrayList<Marque>();
+		List<Marque> listeMarques = new ArrayList<>();
 		Statement requeteListeVoitures;
 		try {
 			requeteListeVoitures = this.connection.createStatement();
@@ -44,8 +33,13 @@ public class MarqueDAO implements MarqueSQL {
 				String couleur_logo = curseurListeMarques.getString("couleur_logo");
 				String slogan = curseurListeMarques.getString("slogan");
 				String date_creation = curseurListeMarques.getString("date_creation");
-				System.out.println("Marque " + nom + ", fondée en " + date_creation +", slogan: " + slogan);
-				Marque marque = new Marque(nom, couleur_logo, slogan, date_creation);
+
+				Marque marque = new Marque(
+						nom,
+						couleur_logo,
+						slogan,
+						date_creation
+				);
 				marque.setId(id);
 				listeMarques.add(marque);
 			}
@@ -56,15 +50,14 @@ public class MarqueDAO implements MarqueSQL {
 	}
 	
 	public void ajouterMarque(Marque marque) {
-		System.out.println("MarqueDAO.ajouterMarque()");
 		try {
 			PreparedStatement requeteAjouterMarque = connection.prepareStatement(SQL_AJOUTER_MARQUE);
+
 			requeteAjouterMarque.setString(1, marque.getNom());
 			requeteAjouterMarque.setString(2, marque.getCouleur_logo());
 			requeteAjouterMarque.setString(3, marque.getSlogan());
 			requeteAjouterMarque.setString(4, marque.getDate_creation());
-			
-			System.out.println("SQL : " + SQL_AJOUTER_MARQUE);
+
 			requeteAjouterMarque.execute();
 			
 		} catch (SQLException e) {
@@ -73,9 +66,9 @@ public class MarqueDAO implements MarqueSQL {
 	}
 	
 	public void modifierMarque(Marque marque) {
-		System.out.println("MarqueDAO.modifierMarque()");
 		try {
 			PreparedStatement requeteModifierMarque = connection.prepareStatement(SQL_MODIFIER_MARQUE);
+
 			requeteModifierMarque.setString(1, marque.getNom());
 			requeteModifierMarque.setString(2, marque.getCouleur_logo());
 			requeteModifierMarque.setString(3, marque.getSlogan());
@@ -84,6 +77,7 @@ public class MarqueDAO implements MarqueSQL {
 			
 			System.out.println("SQL : " + SQL_MODIFIER_MARQUE);
 			requeteModifierMarque.execute();
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -94,18 +88,25 @@ public class MarqueDAO implements MarqueSQL {
 		try {
 			requeteMarque = connection.prepareStatement(SQL_RAPPORTER_MARQUE);
 			requeteMarque.setInt(1, idMarque);
-			System.out.println(SQL_RAPPORTER_MARQUE);
+
 			ResultSet curseurMarque = requeteMarque.executeQuery();
 			curseurMarque.next();
+
 			int id = curseurMarque.getInt("id");
 			String nom = curseurMarque.getString("nom");
-			String couleurLogo = curseurMarque.getString("couleur_logo");
+			String couleur_logo = curseurMarque.getString("couleur_logo");
 			String slogan = curseurMarque.getString("slogan");
-			String dateCreation = curseurMarque.getString("date_creation");
-			System.out.println("Marque " + nom + " de " + dateCreation + " : " + slogan + "ch " + couleurLogo);
-			Marque marque = new Marque(nom, couleurLogo, slogan, dateCreation);
+			String date_creation = curseurMarque.getString("date_creation");
+
+			Marque marque = new Marque(
+					nom,
+					couleur_logo,
+					slogan,
+					date_creation
+			);
 			marque.setId(id);
 			return marque;
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
