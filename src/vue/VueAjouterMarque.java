@@ -1,7 +1,5 @@
 package vue;
 import action.ControleurMarque;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,7 +17,7 @@ public class VueAjouterMarque extends Scene {
 
 	protected Button actionEnregistrerMarque;
 
-	private ControleurMarque controleur;
+	private ControleurMarque controleurMarque;
 
 	public VueAjouterMarque()  {
 		super(new VBox(), 400, 400);
@@ -27,7 +25,7 @@ public class VueAjouterMarque extends Scene {
 		GridPane grilleMarque = new GridPane();
 		this.actionEnregistrerMarque = new Button("Enregistrer");
 		
-		this.actionEnregistrerMarque.setOnAction(arg0 -> controleur.notifierEnregistrerNouvelleMarque());
+		this.actionEnregistrerMarque.setOnAction(arg0 -> controleurMarque.notifierEnregistrerNouvelleMarque());
 		
 		valeurNom = new TextField();
 		grilleMarque.add(new Label("Nom : "), 0, 0);
@@ -60,7 +58,7 @@ public class VueAjouterMarque extends Scene {
 		return marque;
 	}
 	
-	public void setControleur(ControleurMarque controleur) {
-		this.controleur = controleur;
+	public void setControleurMarque(ControleurMarque controleurMarque) {
+		this.controleurMarque = controleurMarque;
 	}
 }

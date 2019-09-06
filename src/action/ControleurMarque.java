@@ -29,7 +29,6 @@ public class ControleurMarque {
 		this.accesseurMarque = new MarqueDAO();
 		this.accesseurVoiture = new VoitureDAO();
 		this.navigateur = NavigateurDesVues.getInstance();
-		idMarque = 0;
 	}
 
 	public static ControleurMarque getInstance() {
@@ -78,6 +77,7 @@ public class ControleurMarque {
 	}
 
 	public void notifierNaviguerEditerMarque(int idMarque) {
+		this.idMarque = idMarque;
 		Marque marque = this.accesseurMarque.rapporterMarque(idMarque);
 		this.vueEditerMarque.afficherMarque(marque);
 		this.navigateur.naviguerVersVueEditerMarque();
@@ -90,9 +90,9 @@ public class ControleurMarque {
 		this.navigateur.naviguerVersVueAjouterVoiture();
 	}
 
-	public void notifierEnregistrerAjoutVoiture() {
+	public void notifierEnregistrerNouvelleVoiture() {
 		Voiture voiture = this.navigateur.getVueAjouterVoiture().demanderVoiture();
-
+		voiture.setId_marque(idMarque);
 		VoitureDAO accesseurVoiture = new VoitureDAO();
 		accesseurVoiture.ajouterVoiture(voiture);
 

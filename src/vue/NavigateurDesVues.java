@@ -26,11 +26,7 @@ public class NavigateurDesVues extends Application{
 		this.vueMarque = new VueMarque();
 		this.vueAjouterMarque = new VueAjouterMarque();
 		this.vueEditerMarque = new VueEditerMarque();
-		try {
-			this.vueAjouterVoiture = new VueAjouterVoiture();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		this.vueAjouterVoiture = new VueAjouterVoiture();
 	}
 
 	public static NavigateurDesVues getInstance() {
@@ -48,9 +44,9 @@ public class NavigateurDesVues extends Application{
 		this.controleur.activerVues(this);
 		this.vueListeMarque.setControleur(controleur);
 		this.vueMarque.setControleurMarque(controleur);
-		this.vueAjouterMarque.setControleur(controleur);
+		this.vueAjouterMarque.setControleurMarque(controleur);
 		this.vueEditerMarque.setControleurMarque(controleur);
-//		this.vueAjouterVoiture.setControleurMarque(controleur);
+		this.vueAjouterVoiture.setControleurMarque(controleur);
 	}
 
 	public VueListeMarque getVueListeMarque() {
