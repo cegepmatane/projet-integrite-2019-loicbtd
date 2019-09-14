@@ -180,16 +180,18 @@ CREATE TABLE statistique_marque (
      checksum text
 );
 
+DROP FUNCTION IF EXISTS generer_statistique_marque();
 CREATE FUNCTION generer_statistique_marque()
-    RETURNS TRIGGER
+    RETURNS VOID
     LANGUAGE 'plpgsql'
 AS $$
 DECLARE
-    description text;
+    nb int := 0;
+    moy decimal;
 BEGIN
-    description := 'modele: '||OLD.nom || ' vitesse: ' || OLD.couleur_logo || ' poids: ' ||  OLD.slogan || ' prix: ' || OLD.date_creation;
-    INSERT INTO statistique_marque(moment,nombre_marque,annee_moyenne,checksum) VALUES(NOW(), 'AJOUT', 'marque', description);
-    return NEW;
+    nb := (SELECT COUNT(id_marque) FROM marque);
+    moy := (SELECT TO_CHAR(AVG(date_creation), '9999999D99') FROM marque);
+    INSERT INTO statistique_marque(moment,nombre_marque,annee_moyenne) VALUES(NOW(), nb, moy);
 END
 $$;
 
@@ -203,16 +205,18 @@ CREATE TABLE statistique_voiture (
     checksum text
 );
 
+DROP FUNCTION IF EXISTS generer_statistique_voiture();
 CREATE FUNCTION generer_statistique_voiture()
-    RETURNS TRIGGER
+    RETURNS VOID
     LANGUAGE 'plpgsql'
 AS $$
 DECLARE
-    description text;
+    nb int;
+    moy decimal;
 BEGIN
-    description := 'modele: '||OLD.nom || ' vitesse: ' || OLD.couleur_logo || ' poids: ' ||  OLD.slogan || ' prix: ' || OLD.date_creation;
-    INSERT INTO journal(moment,operation,objet,description) VALUES(NOW(), 'AJOUT', 'marque', description);
-    return NEW;
+    nb := (SELECT COUNT(id_voiture) FROM voiture);
+    moy := (SELECT TO_CHAR(AVG(puissance), '9999999D99') FROM voiture);
+    INSERT INTO statistique_voiture(moment,nombre_voiture,puissance_moyenne) VALUES(NOW(), nb, moy);
 END
 $$;
 
@@ -226,3 +230,16 @@ CREATE TABLE statistique_marque_voiture (
      nombre_voiture integer,
      checksum text
 );
+
+-- DROP FUNCTION IF EXISTS generer_statistique_marque_voiture;
+-- CREATE FUNCTION generer_statistique_marque_voiture()
+--     RETURNS VOID
+--     LANGUAGE 'plpgsql'
+-- AS $$
+-- DECLARE
+--     nb int;
+--     moy decimal;
+-- BEGIN
+--     INSERT INTO statistique_voiture(moment,marque,nombre_voiture) VALUES(NOW(), nb, moy);
+-- END
+-- $$;
