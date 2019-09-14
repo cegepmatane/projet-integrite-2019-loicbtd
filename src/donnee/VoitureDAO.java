@@ -22,21 +22,21 @@ public class VoitureDAO implements VoitureSQL {
 
 		try {
 			requeteListeVoitures = connection.prepareStatement(SQL_LISTER_VOITURES_PAR_MARQUE);
-			requeteListeVoitures.setInt(1, marque.getId());
+			requeteListeVoitures.setInt(1, marque.getId_marque());
 
 			ResultSet curseurListeVoitures = requeteListeVoitures.executeQuery();
 
 			while(curseurListeVoitures.next()) {
 				Voiture voiture = new Voiture();
 
-				int id = curseurListeVoitures.getInt("id");
+				int id = curseurListeVoitures.getInt("id_voiture");
 				String modele = curseurListeVoitures.getString("modele");
 				String couleur = curseurListeVoitures.getString("couleur");
 				String puissance = curseurListeVoitures.getString("puissance");
 				String annee = curseurListeVoitures.getString("annee");
 				int id_marque = curseurListeVoitures.getInt("id_marque");
 
-				voiture.setId(id);
+				voiture.setId_voiture(id);
 				voiture.setModele(modele);
 				voiture.setCouleur(couleur);
 				voiture.setPuissance(puissance);
@@ -77,7 +77,7 @@ public class VoitureDAO implements VoitureSQL {
 			ResultSet curseurVoiture = requeteMarque.executeQuery();
 			curseurVoiture.next();
 
-			int id = curseurVoiture.getInt("id");
+			int id = curseurVoiture.getInt("id_voiture");
 			String modele = curseurVoiture.getString("modele");
 			String couleur = curseurVoiture.getString("couleur");
 			String puissance = curseurVoiture.getString("puissance");
@@ -89,7 +89,7 @@ public class VoitureDAO implements VoitureSQL {
 					puissance,
 					annee
 			);
-			voiture.setId(id);
+			voiture.setId_voiture(id);
 			return voiture;
 
 		} catch (SQLException e) {
@@ -106,7 +106,7 @@ public class VoitureDAO implements VoitureSQL {
 			requeteModifierVoiture.setString(2, voiture.getCouleur());
 			requeteModifierVoiture.setString(3, voiture.getPuissance());
 			requeteModifierVoiture.setString(4, voiture.getAnnee());
-			requeteModifierVoiture.setInt(5, voiture.getId());
+			requeteModifierVoiture.setInt(5, voiture.getId_voiture());
 
 			System.out.println("SQL : " + SQL_MODIFIER_VOITURE);
 			requeteModifierVoiture.execute();

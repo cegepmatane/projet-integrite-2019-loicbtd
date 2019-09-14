@@ -1,5 +1,5 @@
 -- -- compter marques
--- SELECT count(id) as nombreMarques FROM marque;
+-- SELECT count(id_voiture) as nombreMarques FROM marque;
 
 
 -- -- journalisation
@@ -104,7 +104,7 @@ CREATE or REPLACE FUNCTION modifierMarque(index integer, nouveauNom text)
 AS $$
     UPDATE marque
 	SET nom=nouveauNom
-	WHERE id=index;
+	WHERE id_voiture=index;
 $$
 
 -- journaliserModfier()
@@ -131,4 +131,4 @@ CREATE TRIGGER evenementModifierMarque
 
 UPDATE marque
 	SET nom=nouveauNom
-	WHERE id=index;
+	WHERE id_voiture=index;

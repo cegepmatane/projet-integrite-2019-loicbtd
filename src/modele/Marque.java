@@ -2,7 +2,7 @@ package modele;
 
 public class Marque {
 
-	protected int id;
+	protected int id_marque;
 	protected String nom;
 	protected String couleur_logo;
 	protected String slogan;
@@ -31,19 +31,19 @@ public class Marque {
 		this.date_creation = date_creation;
 	}
 
-	public Marque(int id, String nom, String couleur_logo, String slogan, String date_creation) {
-		this.id = id;
+	public Marque(int id_marque, String nom, String couleur_logo, String slogan, String date_creation) {
+		this.id_marque = id_marque;
 		this.nom = nom;
 		this.couleur_logo = couleur_logo;
 		this.slogan = slogan;
 		this.date_creation = date_creation;
 	}
 
-	public int getId() {
-		return id;
+	public int getId_marque() {
+		return id_marque;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setId_marque(int id_marque) {
+		this.id_marque = id_marque;
 	}
 	public String getNom() {
 		return nom;

@@ -33,7 +33,7 @@ public class VueListeMarque extends Scene {
 
 			Button actionEditeMarque = new Button("Editer");
 			// TODO ameliorer ceci pour respecter architecture cible = pas de parametre dans les notifications au controleur
-			actionEditeMarque.setOnAction(arg0 -> controleur.notifierNaviguerEditerMarque(marque.getId()));
+			actionEditeMarque.setOnAction(arg0 -> controleur.notifierNaviguerEditerMarque(marque.getId_marque()));
 			numero++;
 			this.grilleMarques.add(new Label(marque.getNom()), 0, numero);
 			this.grilleMarques.add(new Label(marque.getDate_creation()), 1, numero);

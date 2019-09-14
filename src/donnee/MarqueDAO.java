@@ -28,7 +28,7 @@ public class MarqueDAO implements MarqueSQL {
 
 			while(curseurListeMarques.next()) {
 
-				int id = curseurListeMarques.getInt("id");
+				int id = curseurListeMarques.getInt("id_marque");
 				String nom = curseurListeMarques.getString("nom");
 				String couleur_logo = curseurListeMarques.getString("couleur_logo");
 				String slogan = curseurListeMarques.getString("slogan");
@@ -40,7 +40,7 @@ public class MarqueDAO implements MarqueSQL {
 						slogan,
 						date_creation
 				);
-				marque.setId(id);
+				marque.setId_marque(id);
 				listeMarques.add(marque);
 			}
 		} catch (SQLException e) {
@@ -73,7 +73,7 @@ public class MarqueDAO implements MarqueSQL {
 			requeteModifierMarque.setString(2, marque.getCouleur_logo());
 			requeteModifierMarque.setString(3, marque.getSlogan());
 			requeteModifierMarque.setString(4, marque.getDate_creation());
-			requeteModifierMarque.setInt(5, marque.getId());
+			requeteModifierMarque.setInt(5, marque.getId_marque());
 			
 			System.out.println("SQL : " + SQL_MODIFIER_MARQUE);
 			requeteModifierMarque.execute();
@@ -92,7 +92,7 @@ public class MarqueDAO implements MarqueSQL {
 			ResultSet curseurMarque = requeteMarque.executeQuery();
 			curseurMarque.next();
 
-			int id = curseurMarque.getInt("id");
+			int id = curseurMarque.getInt("id_marque");
 			String nom = curseurMarque.getString("nom");
 			String couleur_logo = curseurMarque.getString("couleur_logo");
 			String slogan = curseurMarque.getString("slogan");
@@ -104,7 +104,7 @@ public class MarqueDAO implements MarqueSQL {
 					slogan,
 					date_creation
 			);
-			marque.setId(id);
+			marque.setId_marque(id);
 			return marque;
 
 		} catch (SQLException e) {

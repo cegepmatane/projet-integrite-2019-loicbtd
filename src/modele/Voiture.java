@@ -2,7 +2,7 @@ package modele;
 
 public class Voiture {
 
-	protected int id;
+	protected int id_voiture;
 	protected String modele;
 	protected String couleur;
 	protected String puissance;
@@ -20,11 +20,11 @@ public class Voiture {
 		this.annee = annee;
 	}
 
-	public int getId() {
-		return id;
+	public int getId_voiture() {
+		return id_voiture;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setId_voiture(int id_voiture) {
+		this.id_voiture = id_voiture;
 	}
 	public String getModele() {
 		return modele;

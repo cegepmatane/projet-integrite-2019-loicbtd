@@ -62,7 +62,7 @@ public class VueEditerVoiture extends Scene {
     }
 
     public void afficherVoiture(Voiture voiture) {
-        this.idVoiture = voiture.getId();
+        this.idVoiture = voiture.getId_voiture();
         this.valeurModele.setText(voiture.getModele());
         this.valeurCouleur.setText(voiture.getCouleur());
         this.valeurPuissance.setText(voiture.getPuissance());
@@ -76,7 +76,7 @@ public class VueEditerVoiture extends Scene {
                 this.valeurPuissance.getText(),
                 this.valeurAnnee.getText()
         );
-        voiture.setId(idVoiture);
+        voiture.setId_voiture(idVoiture);
         return voiture;
     }
 }

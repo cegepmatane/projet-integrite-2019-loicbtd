@@ -71,7 +71,7 @@ public class VueEditerMarque extends Scene {
 	}
 
 	public void afficherMarque(Marque marque) {
-		this.idMarque = marque.getId();
+		this.idMarque = marque.getId_marque();
 		this.valeurNom.setText(marque.getNom());
 		this.valeurCouleurLogo.setText(marque.getCouleur_logo());
 		this.valeurSlogan.setText(marque.getSlogan());
@@ -85,7 +85,7 @@ public class VueEditerMarque extends Scene {
 				this.valeurSlogan.getText(),
 				this.valeurDateCreation.getText()
 		);
-		marque.setId(idMarque);
+		marque.setId_marque(idMarque);
 		return marque;
 	}
 	
@@ -101,7 +101,7 @@ public class VueEditerMarque extends Scene {
 
 			Button actionEditerVoiture = new Button("Editer");
 			actionEditerVoiture.setOnAction(
-					arg0 -> controleurMarque.notifierNaviguerEditerVoiture(voiture.getId()));
+					arg0 -> controleurMarque.notifierNaviguerEditerVoiture(voiture.getId_voiture()));
 			this.grilleVoitures.add(actionEditerVoiture, 2, rangee);
 			rangee++;
 		}
