@@ -2,17 +2,24 @@ package modele;
 
 public class Voiture {
 
+	public static final String CLE_ID_VOITURE = "id_voiture";
+	public static final String CLE_MODELE = "modele";
+	public static final String CLE_COULEUR = "couleur";
+	public static final String CLE_PUISSANCE = "puissance";
+	public static final String CLE_ANNEE = "annee";
+	public static final String CLE_ID_MARQUE = "id_marque";
+
 	protected int id_voiture;
 	protected String modele;
 	protected String couleur;
-	protected String puissance;
-	protected String annee;
+	protected int puissance;
+	protected int annee;
 	protected int id_marque;
 
 	public Voiture() {
 	}
 
-	public Voiture(String modele, String couleur, String puissance, String annee) {
+	public Voiture(String modele, String couleur, int puissance, int annee) {
 		super();
 		this.modele = modele;
 		this.couleur = couleur;
@@ -38,16 +45,16 @@ public class Voiture {
 	public void setCouleur(String couleur) {
 		this.couleur = couleur;
 	}
-	public String getPuissance() {
+	public int getPuissance() {
 		return puissance;
 	}
-	public void setPuissance(String puissance) {
+	public void setPuissance(int puissance) {
 		this.puissance = puissance;
 	}
-	public String getAnnee() {
+	public int getAnnee() {
 		return annee;
 	}
-	public void setAnnee(String annee) {
+	public void setAnnee(int annee) {
 		this.annee = annee;
 	}
 	public int getId_marque() {

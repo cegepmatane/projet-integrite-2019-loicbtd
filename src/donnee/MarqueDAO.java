@@ -28,11 +28,11 @@ public class MarqueDAO implements MarqueSQL {
 
 			while(curseurListeMarques.next()) {
 
-				int id = curseurListeMarques.getInt("id_marque");
-				String nom = curseurListeMarques.getString("nom");
-				String couleur_logo = curseurListeMarques.getString("couleur_logo");
-				String slogan = curseurListeMarques.getString("slogan");
-				String date_creation = curseurListeMarques.getString("date_creation");
+				int id = curseurListeMarques.getInt(Marque.CLE_ID_MARQUE);
+				String nom = curseurListeMarques.getString(Marque.CLE_NOM);
+				String couleur_logo = curseurListeMarques.getString(Marque.CLE_COULEUR_LOGO);
+				String slogan = curseurListeMarques.getString(Marque.CLE_SLOGAN);
+				int date_creation = curseurListeMarques.getInt(Marque.CLE_DATE_CREATION);
 
 				Marque marque = new Marque(
 						nom,
@@ -56,7 +56,7 @@ public class MarqueDAO implements MarqueSQL {
 			requeteAjouterMarque.setString(1, marque.getNom());
 			requeteAjouterMarque.setString(2, marque.getCouleur_logo());
 			requeteAjouterMarque.setString(3, marque.getSlogan());
-			requeteAjouterMarque.setString(4, marque.getDate_creation());
+			requeteAjouterMarque.setInt(4, marque.getDate_creation());
 
 			requeteAjouterMarque.execute();
 			
@@ -72,7 +72,7 @@ public class MarqueDAO implements MarqueSQL {
 			requeteModifierMarque.setString(1, marque.getNom());
 			requeteModifierMarque.setString(2, marque.getCouleur_logo());
 			requeteModifierMarque.setString(3, marque.getSlogan());
-			requeteModifierMarque.setString(4, marque.getDate_creation());
+			requeteModifierMarque.setInt(4, marque.getDate_creation());
 			requeteModifierMarque.setInt(5, marque.getId_marque());
 			
 			System.out.println("SQL : " + SQL_MODIFIER_MARQUE);
@@ -92,11 +92,11 @@ public class MarqueDAO implements MarqueSQL {
 			ResultSet curseurMarque = requeteMarque.executeQuery();
 			curseurMarque.next();
 
-			int id = curseurMarque.getInt("id_marque");
-			String nom = curseurMarque.getString("nom");
-			String couleur_logo = curseurMarque.getString("couleur_logo");
-			String slogan = curseurMarque.getString("slogan");
-			String date_creation = curseurMarque.getString("date_creation");
+			int id = curseurMarque.getInt(Marque.CLE_ID_MARQUE);
+			String nom = curseurMarque.getString(Marque.CLE_NOM);
+			String couleur_logo = curseurMarque.getString(Marque.CLE_COULEUR_LOGO);
+			String slogan = curseurMarque.getString(Marque.CLE_SLOGAN);
+			int date_creation = curseurMarque.getInt(Marque.CLE_DATE_CREATION);
 
 			Marque marque = new Marque(
 					nom,

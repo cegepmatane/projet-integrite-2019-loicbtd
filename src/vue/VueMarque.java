@@ -44,6 +44,6 @@ public class VueMarque extends Scene {
 		this.valeurNom.setText(marque.getNom());
 		this.valeurCouleurLogo.setText(marque.getCouleur_logo());
 		this.valeurSlogan.setText(marque.getSlogan());
-		this.valeurDateCreation.setText(marque.getDate_creation());
+		this.valeurDateCreation.setText(String.valueOf(marque.getDate_creation()));
 	}
 }

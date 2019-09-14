@@ -2,37 +2,19 @@ package modele;
 
 public class Marque {
 
+	public static final String CLE_ID_MARQUE = "id_marque";
+	public static final String CLE_NOM = "nom";
+	public static final String CLE_COULEUR_LOGO = "couleur_logo";
+	public static final String CLE_SLOGAN = "slogan";
+	public static final String CLE_DATE_CREATION = "date_creation";
+
 	protected int id_marque;
 	protected String nom;
 	protected String couleur_logo;
 	protected String slogan;
-	protected String date_creation;
+	protected int date_creation;
 
-	public Marque(String nom) {
-		super();
-		this.nom = nom;
-	}
-	public Marque(String nom, String couleur_logo) {
-		super();
-		this.nom = nom;
-		this.couleur_logo = couleur_logo;
-	}
-	public Marque(String nom, String couleur_logo, String slogan) {
-		super();
-		this.nom = nom;
-		this.couleur_logo = couleur_logo;
-		this.slogan = slogan;
-	}
-	public Marque(String nom, String couleur_logo, String slogan, String date_creation) {
-		super();
-		this.nom = nom;
-		this.couleur_logo = couleur_logo;
-		this.slogan = slogan;
-		this.date_creation = date_creation;
-	}
-
-	public Marque(int id_marque, String nom, String couleur_logo, String slogan, String date_creation) {
-		this.id_marque = id_marque;
+	public Marque(String nom, String couleur_logo, String slogan, int date_creation) {
 		this.nom = nom;
 		this.couleur_logo = couleur_logo;
 		this.slogan = slogan;
@@ -57,16 +39,16 @@ public class Marque {
 	public void setCouleur_logo(String couleur_logo) {
 		this.couleur_logo = couleur_logo;
 	}
-	public String getDate_creation() {
-		return date_creation;
-	}
-	public void setDate_creation(String date_creation) {
-		this.date_creation = date_creation;
-	}
 	public String getSlogan() {
 		return slogan;
 	}
 	public void setSlogan(String slogan) {
 		this.slogan = slogan;
+	}
+	public int getDate_creation() {
+		return date_creation;
+	}
+	public void setDate_creation(int date_creation) {
+		this.date_creation = date_creation;
 	}
 }

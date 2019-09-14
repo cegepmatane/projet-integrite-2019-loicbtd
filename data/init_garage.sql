@@ -31,14 +31,6 @@ CREATE TABLE voiture (
 -- PROCÉDURES STOCKÉES CRUD
 -------------------------------------------------------------------------------
 
--- MARQUE - SELECT
-DROP FUNCTION IF EXISTS selectionner_toutes_marques();
-CREATE FUNCTION selectionner_toutes_marques()
-    LANGUAGE 'sql'
-AS $$
-    SELECT nom, couleur_logo, slogan, date_creation FROM marque;
-$$;
-
 -- MARQUE - SELECT with id
 DROP FUNCTION IF EXISTS selectionner_marque(id integer);
 CREATE FUNCTION selectionner_marque(id integer)
@@ -179,30 +171,58 @@ EXECUTE PROCEDURE journaliser_suppression_marque();
 -------------------------------------------------------------------------------
 
 -- MARQUE
-DROP TABLE IF EXISTS marque_statistique;
-CREATE TABLE marque_statistique (
+DROP TABLE IF EXISTS statistique_marque;
+CREATE TABLE statistique_marque (
      id_marque_statistique serial PRIMARY KEY ,
      moment timestamp with time zone,
      nombre_marque integer,
      annee_moyenne decimal,
-     checksume text
+     checksum text
 );
 
+CREATE FUNCTION generer_statistique_marque()
+    RETURNS TRIGGER
+    LANGUAGE 'plpgsql'
+AS $$
+DECLARE
+    description text;
+BEGIN
+    description := 'modele: '||OLD.nom || ' vitesse: ' || OLD.couleur_logo || ' poids: ' ||  OLD.slogan || ' prix: ' || OLD.date_creation;
+    INSERT INTO statistique_marque(moment,nombre_marque,annee_moyenne,checksum) VALUES(NOW(), 'AJOUT', 'marque', description);
+    return NEW;
+END
+$$;
+
 -- VOITURE
-DROP TABLE IF EXISTS voiture_statistique;
-CREATE TABLE voiture_statistique (
+DROP TABLE IF EXISTS generer_statistique_voiture;
+CREATE TABLE statistique_voiture (
     id_voiture_statistique serial PRIMARY KEY ,
     moment timestamp with time zone,
     nombre_voiture integer,
     puissance_moyenne decimal,
-    checksume text
+    checksum text
 );
 
-DROP TABLE IF EXISTS marque_voiture_statistique;
-CREATE TABLE marque_voiture_statistique (
+CREATE FUNCTION generer_statistique_voiture()
+    RETURNS TRIGGER
+    LANGUAGE 'plpgsql'
+AS $$
+DECLARE
+    description text;
+BEGIN
+    description := 'modele: '||OLD.nom || ' vitesse: ' || OLD.couleur_logo || ' poids: ' ||  OLD.slogan || ' prix: ' || OLD.date_creation;
+    INSERT INTO journal(moment,operation,objet,description) VALUES(NOW(), 'AJOUT', 'marque', description);
+    return NEW;
+END
+$$;
+
+
+-- Aggrégation
+DROP TABLE IF EXISTS statistique_marque_voiture;
+CREATE TABLE statistique_marque_voiture (
      id_marque_voiture_statistique serial PRIMARY KEY ,
      moment timestamp with time zone,
      marque text,
      nombre_voiture integer,
-     checksume text
+     checksum text
 );

@@ -36,7 +36,7 @@ public class VueListeMarque extends Scene {
 			actionEditeMarque.setOnAction(arg0 -> controleur.notifierNaviguerEditerMarque(marque.getId_marque()));
 			numero++;
 			this.grilleMarques.add(new Label(marque.getNom()), 0, numero);
-			this.grilleMarques.add(new Label(marque.getDate_creation()), 1, numero);
+			this.grilleMarques.add(new Label(String.valueOf(marque.getDate_creation())), 1, numero);
 			this.grilleMarques.add(actionEditeMarque, 2, numero);
 		}
 

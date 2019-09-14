@@ -65,16 +65,16 @@ public class VueEditerVoiture extends Scene {
         this.idVoiture = voiture.getId_voiture();
         this.valeurModele.setText(voiture.getModele());
         this.valeurCouleur.setText(voiture.getCouleur());
-        this.valeurPuissance.setText(voiture.getPuissance());
-        this.valeurAnnee.setText(voiture.getAnnee());
+        this.valeurPuissance.setText(String.valueOf(voiture.getPuissance()));
+        this.valeurAnnee.setText(String.valueOf(voiture.getAnnee()));
     }
 
     public Voiture demanderVoiture() {
         Voiture voiture = new Voiture(
                 this.valeurModele.getText(),
                 this.valeurCouleur.getText(),
-                this.valeurPuissance.getText(),
-                this.valeurAnnee.getText()
+                Integer.valueOf(this.valeurPuissance.getText()),
+                Integer.valueOf(this.valeurAnnee.getText())
         );
         voiture.setId_voiture(idVoiture);
         return voiture;

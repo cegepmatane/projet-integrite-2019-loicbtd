@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import modele.Marque;
 import modele.Voiture;
 
+import java.awt.*;
 import java.util.List;
 
 public class VueEditerMarque extends Scene {
@@ -75,7 +76,7 @@ public class VueEditerMarque extends Scene {
 		this.valeurNom.setText(marque.getNom());
 		this.valeurCouleurLogo.setText(marque.getCouleur_logo());
 		this.valeurSlogan.setText(marque.getSlogan());
-		this.valeurDateCreation.setText(marque.getDate_creation());
+		this.valeurDateCreation.setText(String.valueOf(marque.getDate_creation()));
 	}
 		
 	public Marque demanderMarque() {
@@ -83,7 +84,7 @@ public class VueEditerMarque extends Scene {
 				this.valeurNom.getText(),
 				this.valeurCouleurLogo.getText(),
 				this.valeurSlogan.getText(),
-				this.valeurDateCreation.getText()
+				Integer.valueOf(this.valeurDateCreation.getText())
 		);
 		marque.setId_marque(idMarque);
 		return marque;
@@ -97,7 +98,7 @@ public class VueEditerMarque extends Scene {
 		for(Voiture voiture : listeVoitures) {
 			this.grilleVoitures.add(new Label(voiture.getModele()), 0, rangee);
 			this.grilleVoitures.add(new Label(voiture.getCouleur()), 1, rangee);
-			this.grilleVoitures.add(new Label(voiture.getAnnee()), 2, rangee);
+			this.grilleVoitures.add(new Label(String.valueOf(voiture.getPuissance())),2, rangee);
 
 			Button actionEditerVoiture = new Button("Editer");
 			actionEditerVoiture.setOnAction(

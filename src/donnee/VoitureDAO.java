@@ -29,12 +29,12 @@ public class VoitureDAO implements VoitureSQL {
 			while(curseurListeVoitures.next()) {
 				Voiture voiture = new Voiture();
 
-				int id = curseurListeVoitures.getInt("id_voiture");
-				String modele = curseurListeVoitures.getString("modele");
-				String couleur = curseurListeVoitures.getString("couleur");
-				String puissance = curseurListeVoitures.getString("puissance");
-				String annee = curseurListeVoitures.getString("annee");
-				int id_marque = curseurListeVoitures.getInt("id_marque");
+				int id = curseurListeVoitures.getInt(Voiture.CLE_ID_VOITURE);
+				String modele = curseurListeVoitures.getString(Voiture.CLE_MODELE);
+				String couleur = curseurListeVoitures.getString(Voiture.CLE_COULEUR);
+				int puissance = Integer.valueOf(curseurListeVoitures.getString(Voiture.CLE_PUISSANCE));
+				int annee = Integer.valueOf(curseurListeVoitures.getString(Voiture.CLE_ANNEE));
+				int id_marque = curseurListeVoitures.getInt(Voiture.CLE_ID_MARQUE);
 
 				voiture.setId_voiture(id);
 				voiture.setModele(modele);
@@ -57,8 +57,8 @@ public class VoitureDAO implements VoitureSQL {
 
 			requeteAjouterVoiture.setString(1, voiture.getModele());
 			requeteAjouterVoiture.setString(2, voiture.getCouleur());
-			requeteAjouterVoiture.setString(3, voiture.getPuissance());
-			requeteAjouterVoiture.setString(4, voiture.getAnnee());
+			requeteAjouterVoiture.setInt(3, voiture.getPuissance());
+			requeteAjouterVoiture.setInt(4, voiture.getAnnee());
 			requeteAjouterVoiture.setInt(5, voiture.getId_marque());
 
 			requeteAjouterVoiture.execute();
@@ -77,11 +77,11 @@ public class VoitureDAO implements VoitureSQL {
 			ResultSet curseurVoiture = requeteMarque.executeQuery();
 			curseurVoiture.next();
 
-			int id = curseurVoiture.getInt("id_voiture");
-			String modele = curseurVoiture.getString("modele");
-			String couleur = curseurVoiture.getString("couleur");
-			String puissance = curseurVoiture.getString("puissance");
-			String annee = curseurVoiture.getString("annee");
+			int id = curseurVoiture.getInt(Voiture.CLE_ID_VOITURE);
+			String modele = curseurVoiture.getString(Voiture.CLE_MODELE);
+			String couleur = curseurVoiture.getString(Voiture.CLE_COULEUR);
+			int puissance = curseurVoiture.getInt(Voiture.CLE_PUISSANCE);
+			int annee = curseurVoiture.getInt(Voiture.CLE_ANNEE);
 
 			Voiture voiture = new Voiture(
 					modele,
@@ -104,8 +104,8 @@ public class VoitureDAO implements VoitureSQL {
 
 			requeteModifierVoiture.setString(1, voiture.getModele());
 			requeteModifierVoiture.setString(2, voiture.getCouleur());
-			requeteModifierVoiture.setString(3, voiture.getPuissance());
-			requeteModifierVoiture.setString(4, voiture.getAnnee());
+			requeteModifierVoiture.setInt(3, voiture.getPuissance());
+			requeteModifierVoiture.setInt(4, voiture.getAnnee());
 			requeteModifierVoiture.setInt(5, voiture.getId_voiture());
 
 			System.out.println("SQL : " + SQL_MODIFIER_VOITURE);

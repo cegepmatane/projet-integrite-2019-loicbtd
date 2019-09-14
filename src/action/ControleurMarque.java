@@ -41,19 +41,10 @@ public class ControleurMarque {
 		this.vueListeMarque = navigateur.getVueListeMarque();
 		this.vueEditerMarque = navigateur.getVueEditerMarque();
 		this.vueEditerVoiture = navigateur.getVueEditerVoiture();
-
-		Marque marque = new Marque(
-				"Ferrari",
-				"jaune",
-				"F1",
-				"1800"
-		);
-		this.vueMarque.afficherMarque(marque);
 		this.navigateur.naviguerVersVueMarque();
 
 		List<Marque> listeMarquesTest = accesseurMarque.listerMarques();
 		this.vueListeMarque.afficherListeMarque(listeMarquesTest);
-
 
 		this.navigateur.naviguerVersVueListeMarque();
 	}

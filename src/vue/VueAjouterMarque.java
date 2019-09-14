@@ -53,7 +53,7 @@ public class VueAjouterMarque extends Scene {
 				this.valeurNom.getText(),
 				this.valeurCouleurLogo.getText(),
 				this.valeurSlogan.getText(),
-				this.valeurDateCreation.getText()
+				Integer.valueOf(this.valeurDateCreation.getText())
 		);
 		return marque;
 	}
